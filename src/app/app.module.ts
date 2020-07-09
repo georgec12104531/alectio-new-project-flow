@@ -10,8 +10,10 @@ import { NewProject } from './pages/new-project/new-project.component';
 import { IAppState, rootReducer, INITIAL_STATE } from './store/store';
 import { fromEventPattern } from 'rxjs';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
+// import { MatFormFieldModule } from '@angular/material/form-field';
+// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, Nav, Link, NewProject],
@@ -20,9 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgReduxModule,
     AppRoutingModule,
     MatStepperModule,
-    MatFormFieldModule,
-    FormsModule,
-    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
