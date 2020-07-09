@@ -1,1 +1,12 @@
-<div>Hi I'm a header</div>
+<div class="nav-main-container">
+  <div class="logo-container">
+    <img class="alectio-logo" alt="logo" src="assets/alectio.png" />
+  </div>
+  <div class="nav-sub-container">
+    <div *ngFor="let item of navItems | async">
+      <custom-link [path]="item.path" [linkText]="item.name"></custom-link>
+    </div>
+  </div>
+  <img class="avatar" alt="avatar" src="assets/avatar.png" />
+</div>
+<router-outlet></router-outlet>

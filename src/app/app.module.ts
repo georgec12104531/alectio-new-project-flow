@@ -5,11 +5,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
 import { AppComponent } from './app.component';
 import { Nav } from './components/nav/nav.component';
+import { Link } from './components/link/link.component';
+import { NewProject } from './pages/new-project/new-project.component';
 import { IAppState, rootReducer, INITIAL_STATE } from './store/store';
+import { fromEventPattern } from 'rxjs';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, Nav],
-  imports: [BrowserModule, NgReduxModule, AppRoutingModule],
+  declarations: [AppComponent, Nav, Link, NewProject],
+  imports: [
+    BrowserModule,
+    NgReduxModule,
+    AppRoutingModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

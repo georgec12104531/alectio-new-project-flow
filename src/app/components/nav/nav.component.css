@@ -3,7 +3,7 @@
   width: 100vw;
   background-color: teal;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: light;
   position: fixed;
@@ -12,22 +12,15 @@
   z-index: 1;
 }
 
-.user-container {
-  margin-right: 40px;
-}
-
 .nav-sub-container {
   display: flex;
   justify-content: space-between;
-  width: 55%;
+  width: 60%;
+  height: 100%;
+  align-items: center;
 }
 
-.logo {
-  width: 150px;
-  padding: 23px;
-}
-
-.nav-sub-container a {
+/* .nav-sub-container a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,4 +49,16 @@
 .nav-sub-container a.selected:hover {
   color: white;
   background-color: teal;
+} */
+
+.logo-container {
+  width: 154px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.alectio-logo {
+  transform: scale(0.05);
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from './store/store';
 
@@ -7,16 +7,14 @@ import { IAppState } from './store/store';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   // todos.prop
   @select(['todos', 'prop']) todos;
-  @select() lastUpdate;
+  // @select() lastUpdate;
 
   constructor(private ngRedux: NgRedux<IAppState>) {}
 
   clearTodos() {
     this.ngRedux.dispatch({ type: '' });
   }
-
-  ngOnInit() {}
 }
