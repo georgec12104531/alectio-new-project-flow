@@ -1,7 +1,41 @@
-<div class="sup">
-  <div>hi</div>
-  <mat-horizontal-stepper>
-    <mat-step label="Step 1">Content 1</mat-step>
-    <mat-step label="Step 1">Content 1</mat-step>
-  </mat-horizontal-stepper>
+<div class="stepper-main-container">
+  <mat-horizontal-stepper #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Project Name</ng-template>
+      <mat-form-field>
+        <mat-label>Project Name</mat-label>
+        <input [(ngModel)]="this.newProject.projectName" matInput placeholder="ex. Caboose Beta" formControlName="firstCtrl" required>
+      </mat-form-field>
+      <div>
+        <button (click)="handleProjectName()" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Choose a Data Type</ng-template>
+      <mat-form-field>
+       <mat-label>Data Type</mat-label>
+        <mat-select [(ngModel)]="this.newProject.dataType" [ngModelOptions]="{standalone: true}">
+          <mat-option *ngFor="let type of dataTypes" value="{{type.viewValue}}">
+            {{type.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button (click)="handleDataType()" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
 </div>

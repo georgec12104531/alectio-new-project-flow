@@ -8,9 +8,6 @@ import { IAppState } from './store/store';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  // todos.prop
-  @select(['todos', 'prop']) todos;
-  // @select() lastUpdate;
 
   constructor(private ngRedux: NgRedux<IAppState>) {}
 

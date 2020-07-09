@@ -6,9 +6,16 @@
   margin-top: 16px;
 }
 
-.sup {
+.stepper-main-container {
+  display: flex;
+  justify-content:   center;
   margin-top: 100px;
-  border: 1px solid red;
   height: 1000px;
-  width: 500px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+mat-horizontal-stepper {
+  width: 80%;
 }

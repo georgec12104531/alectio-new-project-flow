@@ -12,8 +12,13 @@ import { fromEventPattern } from 'rxjs';
 import { MatStepperModule } from '@angular/material/stepper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
-// import { MatFormFieldModule } from '@angular/material/form-field';
-// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+
+import logger from 'redux-logger';
+
 
 @NgModule({
   declarations: [AppComponent, Nav, Link, NewProject],
@@ -24,12 +29,17 @@ import { MatSliderModule } from '@angular/material/slider';
     MatStepperModule,
     BrowserAnimationsModule,
     MatSliderModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {
   constructor(ngRedux: NgRedux<IAppState>) {
-    ngRedux.configureStore(rootReducer, INITIAL_STATE);
+    ngRedux.configureStore(rootReducer, INITIAL_STATE, [logger]);
   }
 }
