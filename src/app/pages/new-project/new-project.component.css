@@ -3,7 +3,8 @@
 }
 
 .mat-form-field {
-  margin-top: 16px;
+  /* margin-top: 16px; */
+  padding: 20px 20px 20px 0px;;
 }
 
 .stepper-main-container {

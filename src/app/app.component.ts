@@ -8,10 +8,5 @@ import { IAppState } from './store/store';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-
   constructor(private ngRedux: NgRedux<IAppState>) {}
-
-  clearTodos() {
-    this.ngRedux.dispatch({ type: '' });
-  }
 }

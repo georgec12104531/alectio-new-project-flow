@@ -1,8 +1,8 @@
 <div class="stepper-main-container">
   <mat-horizontal-stepper #stepper>
-  <mat-step [stepControl]="firstFormGroup">
+  <mat-step [stepControl]="firstFormGroup" errorMessage="Project Name is required.">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Project Name</ng-template>
+      <ng-template matStepLabel>Choose Project Name</ng-template>
       <mat-form-field>
         <mat-label>Project Name</mat-label>
         <input [(ngModel)]="this.newProject.projectName" matInput placeholder="ex. Caboose Beta" formControlName="firstCtrl" required>
@@ -24,8 +24,60 @@
         </mat-select>
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
+        <button (click)="handleDataType()" mat-button matStepperPrevious>Back</button>
         <button (click)="handleDataType()" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step >
+    <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Choose a Data Source</ng-template>
+      <mat-form-field>
+       <mat-label>Data Source</mat-label>
+        <mat-select [(ngModel)]="this.newProject.dataSource" [ngModelOptions]="{standalone: true}">
+          <mat-option *ngFor="let source of dataSources" value="{{source.viewValue}}">
+            {{source.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button (click)="handleDataSource()" mat-button matStepperPrevious>Back</button>
+        <button (click)="handleDataSource()" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Enter On-Prem Information</ng-template>
+      <mat-form-field>
+        <mat-label>Public IPV4 Address</mat-label>
+        <input [(ngModel)]="this.newProject.publicAddress" matInput placeholder="ex. Caboose Beta" formControlName="thirdCtrl" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Port</mat-label>
+        <input [(ngModel)]="this.newProject.port" matInput placeholder="ex. Caboose Beta" formControlName="fourthCtrl" required>
+      </mat-form-field>
+      <mat-form-field>
+       <mat-label>Training Size</mat-label>
+        <mat-select [(ngModel)]="this.newProject.trainingSize" [ngModelOptions]="{standalone: true}">
+          <mat-option *ngFor="let size of trainingSizes" value="{{size.viewValue}}">
+            {{size.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Problem Type</mat-label>
+         <mat-select [(ngModel)]="this.newProject.problemType" [ngModelOptions]="{standalone: true}">
+           <mat-option *ngFor="let type of problemTypes" value="{{type.viewValue}}">
+             {{type.viewValue}}
+           </mat-option>
+         </mat-select>
+       </mat-form-field>
+      <!-- <ng-template matStepLabel>Project Name</ng-template> -->
+     
+      <div>
+        <button (click)="handleOnPremInfo()" mat-button matStepperPrevious>Back</button>
+        <button (click)="handleOnPremInfo()" mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
@@ -34,7 +86,10 @@
     <p>You are now done.</p>
     <div>
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <div (click)="handleReset()">
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+      
     </div>
   </mat-step>
 </mat-horizontal-stepper>

@@ -1,3 +1,4 @@
+import { NewProject } from './../pages/new-project/new-project.component';
 export interface IAppState {
   newProject: any;
   navItems: any;
@@ -5,8 +6,13 @@ export interface IAppState {
 
 export const INITIAL_STATE: IAppState = {
   newProject: {
-    projectName: "",
-    dataType: ""
+    projectName: '',
+    dataType: '',
+    dataSource: '',
+    publicAddress: '',
+    port: '',
+    trainingSize: '',
+    problemType: ''
   },
   navItems: [
     { name: 'Home', selected: true, path: 'home', id: 1 },
@@ -19,7 +25,7 @@ export const INITIAL_STATE: IAppState = {
 
 export function rootReducer(state, action) {
   switch(action.type) {
-    case'EDIT_PROJECT_NAME':
+    case 'EDIT_PROJECT_NAME':
       return {
         ...state,
         newProject: {
@@ -27,16 +33,48 @@ export function rootReducer(state, action) {
           projectName: action.projectName
         }
       }
-    case 'EDIT_DATA_TYPE': 
+    case 'EDIT_DATA_TYPE':
         return {
         ...state,
-        dataType: {
+        newProject: {
           ...state.newProject,
           dataType: action.dataType
         }
       }
-    default: 
-      return state
+    case 'EDIT_DATA_SOURCE':
+      return {
+        ...state,
+        newProject: {
+          ...state.newProject,
+          dataSource: action.dataSource
+        }
+      };
+    case 'EDIT_ON_PREM_INFO':
+      return {
+        ...state,
+        newProject: {
+          ...state.newProject,
+          publicAddress: action.payload.publicAddress,
+          port: action.payload.port,
+          trainingSize: action.payload.trainingSize,
+          problemType: action.payload.problemType
+        }
+      };
+    case 'RESET_NEW_PROJECT':
+      return {
+        ...state,
+        newProject: {
+          projectName: '',
+          dataType: '',
+          dataSource: '',
+          publicAddress: '',
+          port: '',
+          trainingSize: '',
+          problemType: ''
+        }
+      }
+    default:
+      return state;
 
   }
 }

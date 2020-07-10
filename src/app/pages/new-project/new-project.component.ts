@@ -10,6 +10,21 @@ interface DataType {
   viewValue: string;
 }
 
+interface DataSource {
+  value: string;
+  viewValue: string;
+}
+
+interface trainingSize {
+  value: string;
+  viewValue: string;
+}
+
+interface problemType {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'new-project',
   templateUrl: './new-project.component.html',
@@ -23,17 +38,43 @@ interface DataType {
 })
 export class NewProject implements OnInit {
   @select('newProject') newProject;
-  // @select(['newProject', 'dataType']) dataType
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-   dataTypes: DataType[] = [
+  thirdFormGroup: FormGroup;
+  fourthFormGroup: FormGroup;
+
+  dataTypes: DataType[] = [
     {value: 'image-data', viewValue: 'Image Data'},
     {value: 'text-data', viewValue: 'Text Data'},
     {value: 'numberica-data', viewValue: 'Numerical Data'}
   ];
-  constructor(private _formBuilder: FormBuilder, private ngRedux: NgRedux<IAppState>) {}
 
+  dataSources: DataSource[] = [
+     {value: 'on-prem', viewValue: 'On Premis'},
+     {value: 'dataset-library', viewValue: 'Dataset Library'},
+  ];
+
+  trainingSizes: trainingSize[] = [
+    {value: '1', viewValue: '1'},
+    {value: '2', viewValue: '2'},
+    {value: '3', viewValue: '3'},
+    {value: '4', viewValue: '4'},
+    {value: '5', viewValue: '5'},
+    {value: '6', viewValue: '6'},
+    {value: '7', viewValue: '7'},
+    {value: '8', viewValue: '8'},
+    {value: '9', viewValue: '9'},
+    {value: '10', viewValue: '10'},
+  ];
+
+  problemTypes: problemType[] = [
+    {value: 'object-detection', viewValue: 'Object Detection'},
+    {value: 'classification', viewValue: 'Classification'},
+    {value: 'text-classification', viewValue: 'Text Classification'}
+  ]
+
+  constructor(private _formBuilder: FormBuilder, private ngRedux: NgRedux<IAppState>) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -42,6 +83,10 @@ export class NewProject implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required],
     });
+    this.thirdFormGroup = this._formBuilder.group({
+      thirdCtrl: ['', Validators.required],
+      fourthCtrl: ['', Validators.required],
+    });
   }
 
   handleDataType() {
@@ -49,7 +94,29 @@ export class NewProject implements OnInit {
   }
   
   handleProjectName() {
-    console.log(this.newProject.projectName)
     this.ngRedux.dispatch({ type: 'EDIT_PROJECT_NAME', projectName: this.newProject.projectName});
+  }
+
+  handleDataSource() {
+    this.ngRedux.dispatch({ type: 'EDIT_DATA_SOURCE', dataSource: this.newProject.dataSource});
+  }
+
+  handleOnPremInfo() {
+    this.ngRedux.dispatch(
+      {
+        type: 'EDIT_ON_PREM_INFO',
+        payload: {
+          publicAddress: this.newProject.dataSource,
+          port: this.newProject.port,
+          trainingSize: this.newProject.trainingSize,
+          problemType: this.newProject.problemType
+        }
+      }
+    );
+  }
+
+  handleReset() {
+    // console.log('handle reset called')
+    this.ngRedux.dispatch({type: 'RESET_NEW_PROJECT'});
   }
 }
