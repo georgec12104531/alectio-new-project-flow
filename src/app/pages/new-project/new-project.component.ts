@@ -32,12 +32,14 @@ interface problemType {
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { displayDefaultIndicatorType: false },
+      useValue: { displayDefaultIndicatorType: false},
     },
   ],
 })
 export class NewProject implements OnInit {
   @select('newProject') newProject;
+
+  selectedFile = null;
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -78,14 +80,18 @@ export class NewProject implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required],
+      firstCtrl: ['asdf', Validators.required],
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
+      secondCtrl: ['asdf', Validators.required],
     });
-    this.thirdFormGroup = this._formBuilder.group({
-      thirdCtrl: ['', Validators.required],
-      fourthCtrl: ['', Validators.required],
+    this.thirdFormGroup = this._formBuilder.group({ 
+      thirdCtrl: ['asdf', Validators.required],
+      fourthCtrl: ['asdf', Validators.required],
+      fifthCtrl: ['asdf', Validators.required],
+    });
+    this.fourthFormGroup = this._formBuilder.group({
+      // fifthCtrl: ['', Validators.required]
     });
   }
 
@@ -109,14 +115,30 @@ export class NewProject implements OnInit {
           publicAddress: this.newProject.dataSource,
           port: this.newProject.port,
           trainingSize: this.newProject.trainingSize,
-          problemType: this.newProject.problemType
+          problemType: this.newProject.problemType,
+          classLabelFile: this.newProject.classLabelFile,
+          fileName: this.newProject.classLabelFile.name.toString()
         }
       }
     );
   }
 
   handleReset() {
-    // console.log('handle reset called')
     this.ngRedux.dispatch({type: 'RESET_NEW_PROJECT'});
   }
+
+  onFileSelected(e) {
+    console.log(e.target.files[0])
+    this.newProject.classLabelFile = e.target.files[0];
+    this.newProject.fileName = e.target.files[0].name;
+    console.log('name',  this.newProject.classLabelFile.name, typeof this.newProject.classLabelFile.name );
+  }
+
+  downloadFile() {
+    const file = this.newProject.classLabelFile;
+    const blob = new Blob([file]);
+    console.log(blob)
+    return URL.createObjectURL(blob);
+  }
+
 }

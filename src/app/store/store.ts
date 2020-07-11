@@ -12,7 +12,9 @@ export const INITIAL_STATE: IAppState = {
     publicAddress: '',
     port: '',
     trainingSize: '',
-    problemType: ''
+    problemType: '',
+    classLabelFile: '',
+    fileName: ''
   },
   navItems: [
     { name: 'Home', selected: true, path: 'home', id: 1 },
@@ -32,7 +34,7 @@ export function rootReducer(state, action) {
           ...state.newProject,
           projectName: action.projectName
         }
-      }
+      };
     case 'EDIT_DATA_TYPE':
         return {
         ...state,
@@ -40,7 +42,7 @@ export function rootReducer(state, action) {
           ...state.newProject,
           dataType: action.dataType
         }
-      }
+      };
     case 'EDIT_DATA_SOURCE':
       return {
         ...state,
@@ -57,7 +59,9 @@ export function rootReducer(state, action) {
           publicAddress: action.payload.publicAddress,
           port: action.payload.port,
           trainingSize: action.payload.trainingSize,
-          problemType: action.payload.problemType
+          problemType: action.payload.problemType,
+          classLabelFile: action.payload.classLabelFile,
+          fileName: action.payload.fileName
         }
       };
     case 'RESET_NEW_PROJECT':
@@ -70,9 +74,11 @@ export function rootReducer(state, action) {
           publicAddress: '',
           port: '',
           trainingSize: '',
-          problemType: ''
+          problemType: '',
+          classLabelFile: '',
+          fileName: ''
         }
-      }
+      };
     default:
       return state;
 

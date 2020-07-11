@@ -1,5 +1,5 @@
 <div class="stepper-main-container">
-  <mat-horizontal-stepper #stepper>
+  <mat-vertical-stepper [linear]=true #stepper>
   <mat-step [stepControl]="firstFormGroup" errorMessage="Project Name is required.">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Choose Project Name</ng-template>
@@ -17,8 +17,8 @@
       <ng-template matStepLabel>Choose a Data Type</ng-template>
       <mat-form-field>
        <mat-label>Data Type</mat-label>
-        <mat-select [(ngModel)]="this.newProject.dataType" [ngModelOptions]="{standalone: true}">
-          <mat-option *ngFor="let type of dataTypes" value="{{type.viewValue}}">
+        <mat-select name="asdf" [(ngModel)]="this.newProject.dataType" [ngModelOptions]="{standalone: true}" required> 
+          <mat-option *ngFor="let type of dataTypes" value="{{type.viewValue}}" >
             {{type.viewValue}}
           </mat-option>
         </mat-select>
@@ -34,7 +34,7 @@
       <ng-template matStepLabel>Choose a Data Source</ng-template>
       <mat-form-field>
        <mat-label>Data Source</mat-label>
-        <mat-select [(ngModel)]="this.newProject.dataSource" [ngModelOptions]="{standalone: true}">
+        <mat-select [(ngModel)]="this.newProject.dataSource" [ngModelOptions]="{standalone: true}" required>
           <mat-option *ngFor="let source of dataSources" value="{{source.viewValue}}">
             {{source.viewValue}}
           </mat-option>
@@ -57,9 +57,9 @@
         <mat-label>Port</mat-label>
         <input [(ngModel)]="this.newProject.port" matInput placeholder="ex. Caboose Beta" formControlName="fourthCtrl" required>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field >
        <mat-label>Training Size</mat-label>
-        <mat-select [(ngModel)]="this.newProject.trainingSize" [ngModelOptions]="{standalone: true}">
+        <mat-select [(ngModel)]="this.newProject.trainingSize" [ngModelOptions]="{standalone: true}" required>
           <mat-option *ngFor="let size of trainingSizes" value="{{size.viewValue}}">
             {{size.viewValue}}
           </mat-option>
@@ -67,20 +67,40 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Problem Type</mat-label>
-         <mat-select [(ngModel)]="this.newProject.problemType" [ngModelOptions]="{standalone: true}">
+         <mat-select [(ngModel)]="this.newProject.problemType" [ngModelOptions]="{standalone: true}" required>
            <mat-option *ngFor="let type of problemTypes" value="{{type.viewValue}}">
              {{type.viewValue}}
            </mat-option>
          </mat-select>
        </mat-form-field>
-      <!-- <ng-template matStepLabel>Project Name</ng-template> -->
-     
+       <div class="upload-file-container">   <input type="file" (change)="onFileSelected($event)" placeholder="Upload file..." required></div>
       <div>
         <button (click)="handleOnPremInfo()" mat-button matStepperPrevious>Back</button>
         <button (click)="handleOnPremInfo()" mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
+  <mat-step [stepControl]="fourthFormGroup">
+    <form [formGroup]="fourthFormGroup">
+      <ng-template matStepLabel>Project Summary</ng-template>
+      <div class="project-summary-container">
+        <h1>Project Summary</h1>
+        <div class="project-info"><span class="info-title">Project Name:</span> {{this.newProject.projectName}}</div>
+        <div class="project-info"><span class="info-title">Public IPV4 Address:</span> {{this.newProject.publicAddress}}</div>
+        <div class="project-info"> <span class="info-title">Port:</span> {{this.newProject.port}}</div>
+        <div class="project-info"><span class="info-title">Training Size:</span> {{this.newProject.trainingSize}}</div>
+        <div class="project-info"><span class="info-title">Problem Type:</span> {{this.newProject.problemType}}</div>
+        <div class="project-info"><span class="info-title">Class Labels:</span> {{this.newProject.fileName}}</div>
+      </div>
+      
+      <div>
+        <button (click)="handleOnPremInfo()" mat-button matStepperPrevious>Back</button>
+        <button (click)="handleOnPremInfo()" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  
+   
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>
@@ -88,9 +108,8 @@
       <button mat-button matStepperPrevious>Back</button>
       <div (click)="handleReset()">
         <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
-      
+      </div>    
     </div>
   </mat-step>
-</mat-horizontal-stepper>
+</mat-vertical-stepper>
 </div>
