@@ -92,18 +92,15 @@
         <div class="project-info"><span class="info-title">Problem Type:</span> {{this.newProject.problemType}}</div>
         <div class="project-info"><span class="info-title">Class Labels:</span> {{this.newProject.fileName}}</div>
       </div>
-      
       <div>
         <button (click)="handleOnPremInfo()" mat-button matStepperPrevious>Back</button>
         <button (click)="handleOnPremInfo()" mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
-  
-   
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
+    <p>You're all done!</p>
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <div (click)="handleReset()">

@@ -53,7 +53,7 @@ export class NewProject implements OnInit {
   ];
 
   dataSources: DataSource[] = [
-     {value: 'on-prem', viewValue: 'On Premis'},
+     {value: 'on-prem', viewValue: 'On-Prem'},
      {value: 'dataset-library', viewValue: 'Dataset Library'},
   ];
 

@@ -11,15 +11,18 @@
 .stepper-main-container {
   display: flex;
   justify-content: center;
-  margin-top: 140px;
+  padding-top: 140px;
   height: 1000px;
   width: 80%;
-  margin-left: auto;
-  margin-right: auto;
+  padding-left: 15%;
+  padding-right: 15%;
+  background-color: #82c0cc;
+
+
 }
 
-mat-horizontal-stepper {
-  width: 80%;
+mat-vertical-stepper {
+  background-color: #82c0cc;
 }
 
 .upload-file-container {
@@ -35,7 +38,7 @@ mat-horizontal-stepper {
 
 .project-info {
   font-size: 16px;
-  padding: 5px;
+  padding: 10px 5px;
 }
 
 .info-title {
