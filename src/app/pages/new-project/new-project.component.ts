@@ -7,26 +7,6 @@ import { IAppState } from '../../redux/store/store';
 
 import { dataTypeAction, projectNameAction, dataSourceAction, onPremInfoAction, resetNewProjectAction } from '../../redux/actions/new-project-actions';
 
-interface DataType {
-  value: string;
-  viewValue: string;
-}
-
-interface DataSource {
-  value: string;
-  viewValue: string;
-}
-
-interface trainingSize {
-  value: string;
-  viewValue: string;
-}
-
-interface problemType {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'new-project',
   templateUrl: './new-project.component.html',
@@ -38,8 +18,13 @@ interface problemType {
     },
   ],
 })
+
 export class NewProject implements OnInit {
   @select('newProject') newProject;
+  @select(['default', 'dataTypes']) dataTypes;
+  @select(['default', 'dataSources']) dataSources;
+  @select(['default', 'trainingSizes']) trainingSizes;
+  @select(['default', 'problemTypes']) problemTypes;
 
   selectedFile = null;
 
@@ -48,52 +33,22 @@ export class NewProject implements OnInit {
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
 
-  dataTypes: DataType[] = [
-    {value: 'image-data', viewValue: 'Image Data'},
-    {value: 'text-data', viewValue: 'Text Data'},
-    {value: 'numberica-data', viewValue: 'Numerical Data'}
-  ];
-
-  dataSources: DataSource[] = [
-     {value: 'on-prem', viewValue: 'On-Prem'},
-     {value: 'dataset-library', viewValue: 'Dataset Library'},
-  ];
-
-  trainingSizes: trainingSize[] = [
-    {value: '1', viewValue: '1'},
-    {value: '2', viewValue: '2'},
-    {value: '3', viewValue: '3'},
-    {value: '4', viewValue: '4'},
-    {value: '5', viewValue: '5'},
-    {value: '6', viewValue: '6'},
-    {value: '7', viewValue: '7'},
-    {value: '8', viewValue: '8'},
-    {value: '9', viewValue: '9'},
-    {value: '10', viewValue: '10'},
-  ];
-
-  problemTypes: problemType[] = [
-    {value: 'object-detection', viewValue: 'Object Detection'},
-    {value: 'classification', viewValue: 'Classification'},
-    {value: 'text-classification', viewValue: 'Text Classification'}
-  ];
-
   constructor(private _formBuilder: FormBuilder, private ngRedux: NgRedux<IAppState>) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['asdf', Validators.required],
+      firstCtrl: ['firstCtrl', Validators.required],
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['asdf', Validators.required],
+      secondCtrl: ['secondCtrl', Validators.required],
     });
-    this.thirdFormGroup = this._formBuilder.group({ 
-      thirdCtrl: ['asdf', Validators.required],
-      fourthCtrl: ['asdf', Validators.required],
-      fifthCtrl: ['asdf', Validators.required],
+    this.thirdFormGroup = this._formBuilder.group({
+      thirdCtrl: ['thirdCtrl', Validators.required],
+      fourthCtrl: ['fourthCtrl', Validators.required],
+      fifthCtrl: ['fiftCtrl', Validators.required],
     });
     this.fourthFormGroup = this._formBuilder.group({
-      fifthCtrl: ['asdf', Validators.required],
+      fifthCtrl: ['sixthCtrl', Validators.required],
     });
   }
 

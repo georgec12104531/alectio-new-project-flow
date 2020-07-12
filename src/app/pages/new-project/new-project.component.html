@@ -5,7 +5,7 @@
       <ng-template matStepLabel>Choose Project Name</ng-template>
       <mat-form-field>
         <mat-label>Project Name</mat-label>
-        <input [(ngModel)]="this.newProject.projectName" matInput placeholder="ex. Caboose Beta" formControlName="firstCtrl" required>
+        <input [(ngModel)]="this.newProject.projectName" matInput placeholder="ex. Valorant" formControlName="firstCtrl" required>
       </mat-form-field>
       <div>
         <button (click)="handleProjectName()" mat-button matStepperNext>Next</button>
@@ -17,8 +17,8 @@
       <ng-template matStepLabel>Choose a Data Type</ng-template>
       <mat-form-field>
        <mat-label>Data Type</mat-label>
-        <mat-select name="asdf" [(ngModel)]="this.newProject.dataType" [ngModelOptions]="{standalone: true}" required> 
-          <mat-option *ngFor="let type of dataTypes" value="{{type.viewValue}}" >
+        <mat-select name="" [(ngModel)]="this.newProject.dataType" [ngModelOptions]="{standalone: true}" required> 
+          <mat-option *ngFor="let type of dataTypes | async" value="{{type.viewValue}}" >
             {{type.viewValue}}
           </mat-option>
         </mat-select>
@@ -35,7 +35,7 @@
       <mat-form-field>
        <mat-label>Data Source</mat-label>
         <mat-select [(ngModel)]="this.newProject.dataSource" [ngModelOptions]="{standalone: true}" required>
-          <mat-option *ngFor="let source of dataSources" value="{{source.viewValue}}">
+          <mat-option *ngFor="let source of dataSources | async" value="{{source.viewValue}}">
             {{source.viewValue}}
           </mat-option>
         </mat-select>
@@ -51,16 +51,16 @@
       <ng-template matStepLabel>Enter On-Prem Information</ng-template>
       <mat-form-field>
         <mat-label>Public IPV4 Address</mat-label>
-        <input [(ngModel)]="this.newProject.publicAddress" matInput placeholder="ex. Caboose Beta" formControlName="thirdCtrl" required>
+        <input [(ngModel)]="this.newProject.publicAddress" matInput placeholder="0.0.0.1" formControlName="thirdCtrl" required>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Port</mat-label>
-        <input [(ngModel)]="this.newProject.port" matInput placeholder="ex. Caboose Beta" formControlName="fourthCtrl" required>
+        <input [(ngModel)]="this.newProject.port" matInput placeholder="0001" formControlName="fourthCtrl" required>
       </mat-form-field>
       <mat-form-field >
        <mat-label>Training Size</mat-label>
         <mat-select [(ngModel)]="this.newProject.trainingSize" [ngModelOptions]="{standalone: true}" required>
-          <mat-option *ngFor="let size of trainingSizes" value="{{size.viewValue}}">
+          <mat-option *ngFor="let size of trainingSizes | async" value="{{size.viewValue}}">
             {{size.viewValue}}
           </mat-option>
         </mat-select>
@@ -68,7 +68,7 @@
       <mat-form-field>
         <mat-label>Problem Type</mat-label>
          <mat-select [(ngModel)]="this.newProject.problemType" [ngModelOptions]="{standalone: true}" required>
-           <mat-option *ngFor="let type of problemTypes" value="{{type.viewValue}}">
+           <mat-option *ngFor="let type of problemTypes | async" value="{{type.viewValue}}">
              {{type.viewValue}}
            </mat-option>
          </mat-select>
@@ -93,8 +93,8 @@
         <div class="project-info"><span class="info-title">Class Labels:</span> {{this.newProject.fileName}}</div>
       </div>
       <div>
-        <button (click)="handleOnPremInfo()" mat-button matStepperPrevious>Back</button>
-        <button (click)="handleOnPremInfo()" mat-button matStepperNext>Next</button>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>

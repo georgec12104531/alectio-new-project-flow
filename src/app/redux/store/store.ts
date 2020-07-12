@@ -1,10 +1,70 @@
 // import { NewProject } from './../pages/new-project/new-project.component';
+import { newProjectTypes } from '../types/new-project-types';
+
 export interface IAppState {
+  default: any;
   newProject: any;
   navItems: any;
 }
 
+interface DataType {
+  value: string;
+  viewValue: string;
+}
+
+const dataTypes: DataType[] = [
+  {value: 'image-data', viewValue: 'Image Data'},
+  {value: 'text-data', viewValue: 'Text Data'},
+  {value: 'numberica-data', viewValue: 'Numerical Data'}
+];
+
+interface DataSource {
+  value: string;
+  viewValue: string;
+}
+
+const dataSources: DataSource[] = [
+  {value: 'on-prem', viewValue: 'On-Prem'},
+  {value: 'dataset-library', viewValue: 'Dataset Library'},
+];
+
+interface trainingSize {
+  value: string;
+  viewValue: string;
+}
+
+const trainingSizes: trainingSize[] = [
+  {value: '1', viewValue: '1'},
+  {value: '2', viewValue: '2'},
+  {value: '3', viewValue: '3'},
+  {value: '4', viewValue: '4'},
+  {value: '5', viewValue: '5'},
+  {value: '6', viewValue: '6'},
+  {value: '7', viewValue: '7'},
+  {value: '8', viewValue: '8'},
+  {value: '9', viewValue: '9'},
+  {value: '10', viewValue: '10'},
+];
+
+
+interface problemType {
+  value: string;
+  viewValue: string;
+}
+
+const problemTypes: problemType[] = [
+  {value: 'object-detection', viewValue: 'Object Detection'},
+  {value: 'classification', viewValue: 'Classification'},
+  {value: 'text-classification', viewValue: 'Text Classification'}
+];
+
 export const INITIAL_STATE: IAppState = {
+  default: {
+    dataTypes,
+    dataSources,
+    trainingSizes,
+    problemTypes
+  },
   newProject: {
     projectName: '',
     dataType: '',
@@ -27,7 +87,7 @@ export const INITIAL_STATE: IAppState = {
 
 export function rootReducer(state, action) {
   switch(action.type) {
-    case 'EDIT_PROJECT_NAME':
+    case newProjectTypes.EDIT_PROJECT_NAME:
       return {
         ...state,
         newProject: {
@@ -35,7 +95,7 @@ export function rootReducer(state, action) {
           projectName: action.projectName
         }
       };
-    case 'EDIT_DATA_TYPE':
+    case newProjectTypes.EDIT_DATA_TYPE:
         return {
         ...state,
         newProject: {
@@ -43,7 +103,7 @@ export function rootReducer(state, action) {
           dataType: action.dataType
         }
       };
-    case 'EDIT_DATA_SOURCE':
+    case newProjectTypes.EDIT_DATA_SOURCE:
       return {
         ...state,
         newProject: {
@@ -51,7 +111,7 @@ export function rootReducer(state, action) {
           dataSource: action.dataSource
         }
       };
-    case 'EDIT_ON_PREM_INFO':
+    case newProjectTypes.EDIT_ON_PREM_INFO:
       return {
         ...state,
         newProject: {
@@ -64,7 +124,7 @@ export function rootReducer(state, action) {
           fileName: action.payload.fileName
         }
       };
-    case 'RESET_NEW_PROJECT':
+    case newProjectTypes.RESET_NEW_PROJECT:
       return {
         ...state,
         newProject: {
