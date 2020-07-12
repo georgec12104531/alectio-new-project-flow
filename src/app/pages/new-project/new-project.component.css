@@ -3,7 +3,6 @@
 }
 
 .mat-form-field {
-  /* margin-top: 16px; */
   width: 30%;
   padding: 20px 20px 20px 0px;;
 }
@@ -17,8 +16,6 @@
   padding-left: 15%;
   padding-right: 15%;
   background-color: #82c0cc;
-
-
 }
 
 mat-vertical-stepper {

@@ -8,7 +8,6 @@ import { Nav } from './components/nav/nav.component';
 import { Link } from './components/link/link.component';
 import { NewProject } from './pages/new-project/new-project.component';
 import { IAppState, rootReducer, INITIAL_STATE } from './redux/store/store';
-import { fromEventPattern } from 'rxjs';
 import { MatStepperModule } from '@angular/material/stepper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';

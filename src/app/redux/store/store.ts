@@ -1,4 +1,3 @@
-// import { NewProject } from './../pages/new-project/new-project.component';
 import { newProjectTypes } from '../types/new-project-types';
 
 export interface IAppState {
