@@ -46,7 +46,6 @@ const trainingSizes: trainingSize[] = [
   {value: '10', viewValue: '10'},
 ];
 
-
 interface problemType {
   value: string;
   viewValue: string;
@@ -124,8 +123,23 @@ export function rootReducer(state, action) {
           fileName: action.payload.fileName
         }
       };
+    case newProjectTypes.SUBMIT_NEW_PROJECT:
+      return {
+        ...state,
+        newProject: {
+          ...state.newProject,
+          projectName: action.payload.projectName,
+          dataType: action.payload.dataType,
+          dataSource: action.payload.dataSource,
+          publicAddress: action.payload.publicAddress,
+          port: action.payload.port,
+          trainingSize: action.payload.trainingSize,
+          problemType: action.payload.problemType,
+          classLabelFile: action.payload.classLabelFile,
+          fileName: action.payload.fileName
+        }
+      };
     default:
       return state;
-
   }
 }

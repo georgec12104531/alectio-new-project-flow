@@ -5,7 +5,9 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from '../../redux/store/store';
 
-import { dataTypeAction, projectNameAction, dataSourceAction, onPremInfoAction } from '../../redux/actions/new-project-actions';
+import { dataTypeAction, projectNameAction, dataSourceAction, onPremInfoAction, handleSubmitAction } from '../../redux/actions/new-project-actions';
+
+import { handleSubmitNewProject } from '../../api-utils/api-utils';
 
 @Component({
   selector: 'new-project',
@@ -52,12 +54,12 @@ export class NewProject implements OnInit {
     });
   }
 
-  handleDataType() {
-    this.ngRedux.dispatch(dataTypeAction(this.newProject.dataType));
-  }
-
   handleProjectName() {
     this.ngRedux.dispatch(projectNameAction(this.newProject.projectName));
+  }
+
+  handleDataType() {
+    this.ngRedux.dispatch(dataTypeAction(this.newProject.dataType));
   }
 
   handleDataSource() {
@@ -66,7 +68,7 @@ export class NewProject implements OnInit {
 
   handleOnPremInfo() {
     this.ngRedux.dispatch(onPremInfoAction(
-      this.newProject.dataSource,
+      this.newProject.publicAddress,
       this.newProject.port,
       this.newProject.trainingSize,
       this.newProject.problemType,
@@ -79,4 +81,38 @@ export class NewProject implements OnInit {
     this.newProject.fileName = e.target.files[0].name;
   }
 
+  handleSubmit() {
+    // Make api POST with details from newProject in our store
+    // dispatch the data from the DB Back into our store
+
+    // handleSubmitNewProject(
+    //   this.newProject.projectName,
+    //   this.newProject.dataType,
+    //   this.newProject.dataSource,
+    //   this.newProject.publicAddress,
+    //   this.newProject.port,
+    //   this.newProject.trainingSize,
+    //   this.newProject.problemType,
+    //   this.newProject.classLabelFile,
+    //   this.newProject.classLabelFile.name.toString()
+    // ).then(({
+    //   projectName,
+    //   dataType,
+    //   dataSource,
+    //   publicAddress,
+    //   port,
+    //   trainingSize,
+    //   problemType,
+    //   classLabelFile,
+    //   fileName}) => this.ngRedux.dispatch(handleSubmitAction(
+    //     projectName,
+    //     dataType,
+    //     dataSource,
+    //     publicAddress,
+    //     port,
+    //     trainingSize,
+    //     problemType,
+    //     classLabelFile,
+    //     fileName)));
+  }
 }

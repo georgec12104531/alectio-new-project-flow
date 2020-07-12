@@ -25,3 +25,20 @@ export const onPremInfoAction = (publicAddress, port, trainingSize, problemType,
     }
   }
 );
+
+export const handleSubmitAction = (projectName, dataType, dataSource, publicAddress, port, trainingSize, problemType, classLabelFile, fileName) => (
+  {
+    type: newProjectTypes.SUBMIT_NEW_PROJECT,
+    payload: {
+      projectName,
+      dataType,
+      dataSource,
+      publicAddress,
+      port,
+      trainingSize,
+      problemType,
+      classLabelFile,
+      fileName
+    }
+  }
+);
