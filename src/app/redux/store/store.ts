@@ -124,21 +124,6 @@ export function rootReducer(state, action) {
           fileName: action.payload.fileName
         }
       };
-    case newProjectTypes.RESET_NEW_PROJECT:
-      return {
-        ...state,
-        newProject: {
-          projectName: '',
-          dataType: '',
-          dataSource: '',
-          publicAddress: '',
-          port: '',
-          trainingSize: '',
-          problemType: '',
-          classLabelFile: '',
-          fileName: ''
-        }
-      };
     default:
       return state;
 

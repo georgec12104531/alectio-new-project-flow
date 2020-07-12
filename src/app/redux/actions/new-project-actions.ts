@@ -25,7 +25,3 @@ export const onPremInfoAction = (publicAddress, port, trainingSize, problemType,
     }
   }
 );
-
-export const resetNewProjectAction = () => (
-  {type: newProjectTypes.RESET_NEW_PROJECT}
-)

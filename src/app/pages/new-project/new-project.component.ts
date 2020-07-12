@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from '../../redux/store/store';
 
-import { dataTypeAction, projectNameAction, dataSourceAction, onPremInfoAction, resetNewProjectAction } from '../../redux/actions/new-project-actions';
+import { dataTypeAction, projectNameAction, dataSourceAction, onPremInfoAction } from '../../redux/actions/new-project-actions';
 
 @Component({
   selector: 'new-project',
@@ -14,7 +14,7 @@ import { dataTypeAction, projectNameAction, dataSourceAction, onPremInfoAction, 
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { displayDefaultIndicatorType: false},
+      useValue: { showError: true},
     },
   ],
 })
@@ -72,10 +72,6 @@ export class NewProject implements OnInit {
       this.newProject.problemType,
       this.newProject.classLabelFile,
       this.newProject.classLabelFile.name.toString()));
-  }
-
-  handleReset() {
-    this.ngRedux.dispatch(resetNewProjectAction());
   }
 
   onFileSelected(e) {

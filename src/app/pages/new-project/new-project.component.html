@@ -12,20 +12,20 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
+  <mat-step [stepControl]="secondFormGroup" errorMessage="Data Type is required.">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Choose a Data Type</ng-template>
       <mat-form-field>
        <mat-label>Data Type</mat-label>
         <mat-select name="" [(ngModel)]="this.newProject.dataType" [ngModelOptions]="{standalone: true}" required> 
-          <mat-option *ngFor="let type of dataTypes | async" value="{{type.viewValue}}" >
+          <mat-option *ngFor="let type of dataTypes | async" value="{{type.viewValue}}" required>
             {{type.viewValue}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <div>
         <button (click)="handleDataType()" mat-button matStepperPrevious>Back</button>
-        <button (click)="handleDataType()" mat-button matStepperNext>Next</button>
+        <button  *ngIf="this.newProject.dataType" (click)="handleDataType()" mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step >
@@ -42,7 +42,7 @@
       </mat-form-field>
       <div>
         <button (click)="handleDataSource()" mat-button matStepperPrevious>Back</button>
-        <button (click)="handleDataSource()" mat-button matStepperNext>Next</button>
+        <button *ngIf="this.newProject.dataSource" (click)="handleDataSource()" mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
@@ -101,12 +101,6 @@
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You're all done!</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <div (click)="handleReset()">
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>    
-    </div>
   </mat-step>
 </mat-vertical-stepper>
 </div>
