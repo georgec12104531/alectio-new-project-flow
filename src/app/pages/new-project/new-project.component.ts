@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 import { NgRedux, select } from '@angular-redux/store';
-import { IAppState } from '../../store/store';
+import { IAppState } from '../../redux/store/store';
+
+import { dataTypeAction, projectNameAction, dataSourceAction, onPremInfoAction, resetNewProjectAction } from '../../redux/actions/new-project-actions';
 
 interface DataType {
   value: string;
@@ -74,7 +76,7 @@ export class NewProject implements OnInit {
     {value: 'object-detection', viewValue: 'Object Detection'},
     {value: 'classification', viewValue: 'Classification'},
     {value: 'text-classification', viewValue: 'Text Classification'}
-  ]
+  ];
 
   constructor(private _formBuilder: FormBuilder, private ngRedux: NgRedux<IAppState>) {}
 
@@ -91,54 +93,39 @@ export class NewProject implements OnInit {
       fifthCtrl: ['asdf', Validators.required],
     });
     this.fourthFormGroup = this._formBuilder.group({
-      // fifthCtrl: ['', Validators.required]
+      fifthCtrl: ['asdf', Validators.required],
     });
   }
 
   handleDataType() {
-    this.ngRedux.dispatch({ type: 'EDIT_DATA_TYPE', dataType: this.newProject.dataType});
+    this.ngRedux.dispatch(dataTypeAction(this.newProject.dataType));
   }
-  
+
   handleProjectName() {
-    this.ngRedux.dispatch({ type: 'EDIT_PROJECT_NAME', projectName: this.newProject.projectName});
+    this.ngRedux.dispatch(projectNameAction(this.newProject.projectName));
   }
 
   handleDataSource() {
-    this.ngRedux.dispatch({ type: 'EDIT_DATA_SOURCE', dataSource: this.newProject.dataSource});
+    this.ngRedux.dispatch(dataSourceAction(this.newProject.dataSource));
   }
 
   handleOnPremInfo() {
-    this.ngRedux.dispatch(
-      {
-        type: 'EDIT_ON_PREM_INFO',
-        payload: {
-          publicAddress: this.newProject.dataSource,
-          port: this.newProject.port,
-          trainingSize: this.newProject.trainingSize,
-          problemType: this.newProject.problemType,
-          classLabelFile: this.newProject.classLabelFile,
-          fileName: this.newProject.classLabelFile.name.toString()
-        }
-      }
-    );
+    this.ngRedux.dispatch(onPremInfoAction(
+      this.newProject.dataSource,
+      this.newProject.port,
+      this.newProject.trainingSize,
+      this.newProject.problemType,
+      this.newProject.classLabelFile,
+      this.newProject.classLabelFile.name.toString()));
   }
 
   handleReset() {
-    this.ngRedux.dispatch({type: 'RESET_NEW_PROJECT'});
+    this.ngRedux.dispatch(resetNewProjectAction());
   }
 
   onFileSelected(e) {
-    console.log(e.target.files[0])
     this.newProject.classLabelFile = e.target.files[0];
     this.newProject.fileName = e.target.files[0].name;
-    console.log('name',  this.newProject.classLabelFile.name, typeof this.newProject.classLabelFile.name );
-  }
-
-  downloadFile() {
-    const file = this.newProject.classLabelFile;
-    const blob = new Blob([file]);
-    console.log(blob)
-    return URL.createObjectURL(blob);
   }
 
 }

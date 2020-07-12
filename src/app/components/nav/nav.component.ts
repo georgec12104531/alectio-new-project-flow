@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
-import { IAppState } from '../../store/store';
+import { IAppState } from '../../redux/store/store';
 
 @Component({
   selector: 'nav',

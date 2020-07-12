@@ -1,4 +1,4 @@
-import { NewProject } from './../pages/new-project/new-project.component';
+// import { NewProject } from './../pages/new-project/new-project.component';
 export interface IAppState {
   newProject: any;
   navItems: any;

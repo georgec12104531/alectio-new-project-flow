@@ -4,7 +4,7 @@ import { Nav } from './components/nav/nav.component';
 import { NewProject } from './pages/new-project/new-project.component';
 
 const routes = [
-  { path: '', redirectTo:"/new-project", pathMatch: "full" },
+  { path: '', redirectTo:'/new-project', pathMatch: 'full' },
   { path: 'home', component: Nav },
   { path: 'new-project', component: NewProject },
   { path: 'all-projects', component: Nav },
